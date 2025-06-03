@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   evolution-api:
-    image: evolutionapi/evolution-api:latest
+    image: evolutionapi/evolution-api:v1.2.0  # Cambia a una versión específica
     container_name: evolution-api
     ports:
       - "3000:3000"
