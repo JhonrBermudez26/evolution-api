@@ -1,22 +1,20 @@
 version: '3.8'
+
 services:
-  api:
-    container_name: evolution_api
-    image: atendai/evolution-api:homolog
-    restart: always
+  evolution-api:
+    image: evolutionapi/evolution-api:latest
+    container_name: evolution-api
     ports:
-      - 8080:8080
+      - "3000:3000"
+    environment:
+      - AUTHENTICATION_API_KEY=${AUTHENTICATION_API_KEY}
+      - WEBHOOK_URL=${WEBHOOK_URL}
+      - DATABASE_ENABLED=${DATABASE_ENABLED}
+      - DATABASE_PROVIDER=${DATABASE_PROVIDER}
+      - DATABASE_CONNECTION_URI=${DATABASE_CONNECTION_URI}
+      - CACHE_REDIS_ENABLED=${CACHE_REDIS_ENABLED}
     volumes:
-      - evolution_instances:/evolution/instances
-    networks:
-      - evolution-net
-    env_file:
-      - .env
-    expose:
-      - 8080
+      - evolution-data:/data
+
 volumes:
-  evolution_instances:
-networks:
-  evolution-net:
-    name: evolution-net
-    driver: bridge
+  evolution-data:
